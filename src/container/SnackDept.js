@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import Snack from "../components/Snack";
 import { snackUpdate } from "../redux/actions/action";
 
 const SnackDept = () => {
-  // const snackData = useSelector(state => state.snack.snackData.slice(0, 2));
-  const snackData = useSelector(state => state.snack.snackData);
+  const snackData = useSelector(state => state.snack.snackData.slice(0, 2), shallowEqual);
   const dispatch = useDispatch();
 
   console.log("SNACK RENDER");
@@ -29,7 +28,7 @@ const SnackDept = () => {
     <>
       <h1>Snack Department</h1>
       <div className="card-group">
-        {snackData.slice(0, 2).map(snack => (
+        {snackData.map(snack => (
           <Snack
             key={snack.id}
             snack={snack}
